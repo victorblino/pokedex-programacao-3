@@ -1,69 +1,141 @@
-# Welcome to your Lovable project
 
-## Project info
+# Pokédex - Aplicação React com TypeScript - Programação 3
 
-**URL**: https://lovable.dev/projects/9754ef92-345f-414a-abe6-2f65c54a1819
+## Visão Geral
 
-## How can I edit this code?
+Esta aplicação é uma Pokédex moderna desenvolvida com React, TypeScript e Tailwind CSS. Ela permite aos usuários navegar, pesquisar e filtrar Pokémon, além de visualizar detalhes específicos de cada um deles.
 
-There are several ways of editing your application.
+## Recursos
 
-**Use Lovable**
+- **Listagem de Pokémon**: Exibe uma grade de cards de Pokémon com imagens e tipos.
+- **Paginação**: Navegação fácil através de páginas de resultados com controles intuitivos.
+- **Pesquisa**: Busca por nome de Pokémon em tempo real.
+- **Filtragem por Tipo**: Filtra Pokémon por seus tipos elementais.
+- **Visualização Detalhada**: Página dedicada para visualizar informações detalhadas de cada Pokémon.
+- **Design Responsivo**: Interface adaptável para dispositivos móveis e desktop.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/9754ef92-345f-414a-abe6-2f65c54a1819) and start prompting.
+## Tecnologias Utilizadas
 
-Changes made via Lovable will be committed automatically to this repo.
+- **React**: Biblioteca JavaScript para construção de interfaces.
+- **TypeScript**: Superset JavaScript tipado para desenvolvimento mais seguro.
+- **Tailwind CSS**: Framework CSS utilitário para estilos rápidos e consistentes.
+- **React Query**: Gerenciamento de estado do servidor e requisições de dados.
+- **React Router**: Navegação entre páginas da aplicação.
+- **Shadcn UI**: Componentes reutilizáveis para uma experiência de usuário consistente.
+- **PokéAPI**: API pública para obtenção de dados de Pokémon.
 
-**Use your preferred IDE**
+## Estrutura do Projeto
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── PokemonCard.tsx  # Card de exibição para cada Pokémon
+│   └── ui/              # Componentes de UI (shadcn)
+├── lib/                 # Utilitários e funções auxiliares
+├── pages/               # Páginas da aplicação
+│   ├── Index.tsx        # Página principal (listagem de Pokémon)
+│   ├── DetalhePokemon.tsx  # Página de detalhes do Pokémon
+│   └── NotFound.tsx     # Página 404
+├── services/            # Serviços e APIs
+│   └── pokemon.ts       # Funções para interagir com a PokéAPI
+├── types/               # Definições de tipos TypeScript
+│   └── pokemon.ts       # Interfaces para os dados de Pokémon
+├── App.tsx              # Componente principal da aplicação
+└── main.tsx             # Ponto de entrada da aplicação
 ```
 
-**Edit a file directly in GitHub**
+## Funcionalidades Detalhadas
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Listagem de Pokémon
 
-**Use GitHub Codespaces**
+- Exibe 20 Pokémon por página
+- Cada card mostra:
+  - Imagem oficial do Pokémon
+  - Nome (com primeira letra em maiúscula)
+  - Número na Pokédex
+  - Tipos (com cores correspondentes)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Paginação
 
-## What technologies are used for this project?
+- Navegação intuitiva entre páginas
+- Exibe página atual e total de páginas
+- Botões "Anterior" e "Próximo"
+- Números de página para acesso direto
 
-This project is built with .
+### Filtragem e Busca
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- Pesquisa por nome em tempo real
+- Filtragem por 18 tipos diferentes de Pokémon
+- Redefine automaticamente para a primeira página ao alterar filtros
+- Exibe mensagem quando nenhum resultado é encontrado
 
-## How can I deploy this project?
+### Página de Detalhes
 
-Simply open [Lovable](https://lovable.dev/projects/9754ef92-345f-414a-abe6-2f65c54a1819) and click on Share -> Publish.
+- Mostra informações detalhadas sobre um Pokémon específico:
+  - Imagem em tamanho maior
+  - Nome e número na Pokédex
+  - Tipos (com cores correspondentes)
+  - Altura e peso
+  - Habilidades
+- Botão para retornar à listagem principal
 
-## I want to use a custom domain - is that possible?
+## Gerenciamento de Estado
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+A aplicação utiliza React Query para gerenciar:
+- Carregamento de dados da API
+- Cache de resultados para melhor performance
+- Estados de carregamento e erro
+- Paginação eficiente
+
+## Estilos e Temas
+
+- **Sistema de Cores por Tipo**: Cada tipo de Pokémon tem uma cor específica associada
+- **Animações**: Efeitos sutis para melhorar a experiência do usuário
+- **Componentes Reutilizáveis**: Uso de componentes shadcn UI para consistência visual
+
+## Serviços de API
+
+### `getPokemonList`
+Obtém uma lista paginada de Pokémon da PokéAPI.
+
+### `getPokemonDetails`
+Obtém detalhes completos de um Pokémon específico por ID ou nome.
+
+### `getPokemonDetailsInBatches`
+Otimiza o carregamento obtendo detalhes de vários Pokémon em lotes.
+
+## Tratamento de Erros
+
+- Feedback visual para estados de carregamento
+- Mensagens de erro amigáveis quando a API não responde
+- Redirecionamento para página 404 quando um Pokémon não é encontrado
+
+## Responsividade
+
+- Layout de grade adaptável (1-4 colunas dependendo do tamanho da tela)
+- Controles de interface otimizados para toque em dispositivos móveis
+- Tamanho de texto e espaçamento ajustáveis
+
+## Como Executar o Projeto
+
+1. Clone o repositório
+2. Instale as dependências:
+   ```
+   npm install
+   ```
+3. Inicie o servidor de desenvolvimento:
+   ```
+   npm run dev
+   ```
+4. Acesse a aplicação no navegador:
+   ```
+   http://localhost:8080
+   ```
+
+## Possíveis Melhorias Futuras
+
+- Adicionar modo escuro
+- Implementar salvamento de Pokémon favoritos
+- Adicionar comparação entre Pokémon
+- Expandir detalhes com estatísticas de base, movimentos e evoluções
+- Adicionar suporte para idiomas adicionais
